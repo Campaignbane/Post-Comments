@@ -1,0 +1,127 @@
+<html>
+
+<head>
+	<title> User Profile Page </title>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+	<script>
+	
+	$(document).ready(function (){
+	    let query = location.search
+		let param = new URLSearchParams(query)
+		let id = param.get("id")		
+		
+		
+		var users = []
+		var comments = []
+		var posts = []
+		
+		
+		axios.get("https://jsonplaceholder.typicode.com/comments")
+			.then(response => {
+				comments = response.data
+			})
+		
+		axios.get("https://jsonplaceholder.typicode.com/posts")
+			.then(response => {
+				posts = response.data
+			})
+			
+		axios.get(`https://jsonplaceholder.typicode.com/users/${id}`)
+			.then(response => {
+				
+			
+				user = response.data
+				
+				$("#user_name").text(users[user_index].name)
+				
+				$("#user_details").text(users[user_index].name)
+				.text(`Address - ${users[user_index].address.suite},
+						${users[user_index].address.street},
+						${users[user_index].address.city} 
+					`)
+					
+					
+					
+					for(var j = 0; j < users.length; j++){
+				      {
+					 
+					    let NoOfComments = 0
+					    if(comments[i].postId == posts[j].id)
+					     { 
+						   for(var i = 0; i < comments.length; i++)
+					  
+					  {
+					
+   					     if(comments[i].postId == posts[j].id)
+						 {
+							noOfComments++
+						 }
+					     
+		
+		}
+		
+		
+		                $("posts").append('
+						
+						<div class="col-lg-4">
+						   <div class="card">
+						      <div class="card-header">${posts[j].title}</div>
+						      <div class="card-body">${posts[j].body}</div>
+							  <div class="card-footer">${noOfComments} Comments</div>
+                            </div>
+						</div>
+					    
+						')
+
+				}
+				
+			}
+		
+		}
+		
+		
+		
+	</script>
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6">
+			
+			    </div>
+				<div class="col-lg-6">
+				   <div class="card" style="width:400px">
+					  <div class="card-body">
+					  <h4 class="card-title" id="user_name">Bane Huncho</h4>
+					  <p class="card-text" id="user_details">Some example text some example text. Jane Doe is an architect and engineer</p>
+					</div>
+					<img class="card-img-bottom" src="https://static.vecteezy.com/system/resources/previews/000/380/945/original/edit-profile-vector-icon.jpg" alt="Card image" style="width:100%">
+				</div>
+			</div>
+		</div>
+	</div>
+    
+	</div>
+	<br>
+	<br>
+	<div class="col-lg-4">
+		  <div class="row" id="posts">
+				<div class="col-lg-12">
+					<h1>Posts</h1>
+				</div>
+	      
+	      </div>
+	</div>
+	
+</body>
+
+</html>

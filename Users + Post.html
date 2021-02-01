@@ -1,0 +1,84 @@
+<html>
+
+<head>
+	<title> Uspost and comments </title>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+	<script>
+	    
+		$(document).ready(function (){
+		
+		var users = []
+		var posts = []
+		
+			axios.get("https://jsonplaceholder.typicode.com/posts")
+			.then(response => {
+				posts = response.data
+			})
+			
+			axios.get("https://jsonplaceholder.typicode.com/users")
+			.then(response => {
+			
+				users = response.data
+				
+			function populate_card(user_index)
+		{
+			$("#posts").empty()
+
+			//Do the magical stuff based on user_index
+			
+			$("#user_name").text(users[user_index].name)
+				
+				$("#user_details")
+				.text(`Address - ${users[user_index].address.suite},
+						${users[user_index].address.street},
+						${users[user_index].address.city} 
+					`)
+					
+			
+					for(var j = 0; j < posts.length; j++)
+					{
+						if(posts[j].userId == users[user_index].id)
+						{
+							$("#posts").append(`
+								<li> ${posts[j].title}</li>
+							
+							`)
+						}
+					}	
+		
+		}
+			
+			
+		
+	</script>
+</head>
+
+<body>
+
+  <h1> Playing with APIs </h1>
+  
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody id="data-table">
+     
+     
+    </tbody>
+  </table>
+	
+
+ 
+</body>
+
+</html>
